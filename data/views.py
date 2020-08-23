@@ -13,10 +13,13 @@ from data.models import TrafficFlow
 from data.serializer import TrafficFlowSerializer
 from data.models import IllegalStatistics
 from data.serializer import IllegalStatisticsSerializer
+from data.models import SpeedLimit
+from data.serializer import SpeedLimitSerializer
 
 # Create your views here.
 
 
+# 数据测试
 class DataViewSet(viewsets.ModelViewSet):
     queryset = Data.objects.all()
     serializer_class = DataSerializer
@@ -51,3 +54,11 @@ class IllegalStatisticsViewSet(viewsets.ModelViewSet):
     serializer_class = IllegalStatisticsSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
     filter_fields = ('value', 'name', )
+
+
+# 限速输入
+class SpeedLimitViewSet(viewsets.ModelViewSet):
+    queryset = SpeedLimit.objects.all()
+    serializer_class = SpeedLimitSerializer
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
+    filter_fields = ('speed', )

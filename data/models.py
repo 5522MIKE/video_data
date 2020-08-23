@@ -36,6 +36,13 @@ class IllegalStatistics(models.Model):
     name = models.CharField(max_length=10)
 
 
+# 限速表
+class SpeedLimit(models.Model):
+    id = models.IntegerField(primary_key=True)
+    # video = models.ForeignKey('Video', on_delete=models.CASCADE)
+    speed = models.IntegerField()
+
+
 # 视频Video表
 class Video(models.Model):
     id = models.IntegerField(primary_key=True)
