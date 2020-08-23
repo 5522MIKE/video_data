@@ -11,6 +11,8 @@ from data.models import IllegalData
 from data.serializer import IllegalDataSerializer
 from data.models import TrafficFlow
 from data.serializer import TrafficFlowSerializer
+from data.models import IllegalStatistics
+from data.serializer import IllegalStatisticsSerializer
 
 # Create your views here.
 
@@ -27,6 +29,7 @@ class VideoViewSet(viewsets.ModelViewSet):
     serializer_class = VideoSerializer
 
 
+# 违规信息
 class IllegalDataViewSet(viewsets.ModelViewSet):
     queryset = IllegalData.objects.all()
     serializer_class = IllegalDataSerializer
@@ -34,8 +37,17 @@ class IllegalDataViewSet(viewsets.ModelViewSet):
     filter_fields = ('id', 'plate', 'upload_time', 'illegal_time', 'illegal',)
 
 
+# 路口饱和度
 class TrafficFlowViewSet(viewsets.ModelViewSet):
     queryset = TrafficFlow.objects.all()
     serializer_class = TrafficFlowSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filter_fields = ('car_number', )
+    filter_fields = ('car_number', 'motor_number', 'people_number', )
+
+
+# 违规行为统计
+class IllegalStatisticsViewSet(viewsets.ModelViewSet):
+    queryset = IllegalStatistics.objects.all()
+    serializer_class = IllegalStatisticsSerializer
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
+    filter_fields = ('value', 'name', )

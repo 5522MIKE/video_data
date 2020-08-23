@@ -4,6 +4,7 @@ from data.models import Data
 from data.models import Video
 from data.models import IllegalData
 from data.models import TrafficFlow
+from data.models import IllegalStatistics
 
 
 class DataSerializer(serializers.ModelSerializer):
@@ -27,4 +28,10 @@ class IllegalDataSerializer(serializers.ModelSerializer):
 class TrafficFlowSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrafficFlow
-        fields = ['car_number']
+        fields = ['car_number', 'motor_number', 'people_number', ]
+
+
+class IllegalStatisticsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IllegalStatistics
+        fields = ['value', 'name', ]
