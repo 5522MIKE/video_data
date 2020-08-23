@@ -11,6 +11,7 @@ router.register('IllegalData', views.IllegalDataViewSet)
 router.register('TrafficFlow', views.TrafficFlowViewSet)
 router.register('IllegalStatistics', views.IllegalStatisticsViewSet)
 router.register('SpeedLimit', views.SpeedLimitViewSet)
+router.register('Video', views.VideoViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

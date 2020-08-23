@@ -6,6 +6,7 @@ from data.models import IllegalData
 from data.models import TrafficFlow
 from data.models import IllegalStatistics
 from data.models import SpeedLimit
+from data.models import Video
 
 
 class DataSerializer(serializers.ModelSerializer):
@@ -42,4 +43,10 @@ class SpeedLimitSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpeedLimit
         fields = ['speed', ]
+
+
+class VideoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Video
+        fields = ['video_path', ]
 

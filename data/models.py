@@ -47,8 +47,7 @@ class SpeedLimit(models.Model):
 class Video(models.Model):
     id = models.IntegerField(primary_key=True)
     upload_time = models.DateTimeField()
-    video_name = models.CharField(max_length=30)
-    video_name = models.CharField(max_length=30)
+    video_path = models.CharField(max_length=100)
 
 
 # 违规车辆图片表

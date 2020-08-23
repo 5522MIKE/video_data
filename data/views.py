@@ -5,8 +5,6 @@ from rest_framework.response import Response
 
 from data.models import Data
 from data.serializer import DataSerializer
-from data.models import Video
-from data.serializer import VideoSerializer
 from data.models import IllegalData
 from data.serializer import IllegalDataSerializer
 from data.models import TrafficFlow
@@ -15,6 +13,8 @@ from data.models import IllegalStatistics
 from data.serializer import IllegalStatisticsSerializer
 from data.models import SpeedLimit
 from data.serializer import SpeedLimitSerializer
+from data.models import Video
+from data.serializer import VideoSerializer
 
 # Create your views here.
 
@@ -25,11 +25,6 @@ class DataViewSet(viewsets.ModelViewSet):
     serializer_class = DataSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
     filter_fields = ('name', 'author')  # 列出搜索字段
-
-
-class VideoViewSet(viewsets.ModelViewSet):
-    queryset = Video.objects.all()
-    serializer_class = VideoSerializer
 
 
 # 违规信息
@@ -62,3 +57,11 @@ class SpeedLimitViewSet(viewsets.ModelViewSet):
     serializer_class = SpeedLimitSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
     filter_fields = ('speed', )
+
+
+# 视频路径
+class VideoViewSet(viewsets.ModelViewSet):
+    queryset = Video.objects.all()
+    serializer_class = VideoSerializer
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
+    filter_fields = ('video_path',)
