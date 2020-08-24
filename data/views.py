@@ -35,7 +35,7 @@ class IllegalDataViewSet(viewsets.ModelViewSet):
     queryset = IllegalData.objects.all()
     serializer_class = IllegalDataSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filter_fields = ('id', 'plate', 'upload_time', 'illegal_time', 'illegal',)
+    filter_fields = ('id', 'videoId', 'plate', 'upload_time', 'illegal_time', 'illegal',)
 
 
 # 路口饱和度

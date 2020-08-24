@@ -12,6 +12,7 @@ class Data(models.Model):
 # 违规信息表
 class IllegalData(models.Model):
     id = models.IntegerField(primary_key=True)
+    videoId = models.IntegerField(default='1')
     plate = models.CharField(max_length=30)
     upload_time = models.CharField(max_length=30)
     illegal_time = models.CharField(max_length=30)

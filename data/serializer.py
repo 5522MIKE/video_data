@@ -42,5 +42,5 @@ class IllegalStatisticsSerializer(serializers.ModelSerializer):
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = VideoSpeed
-        fields = ['video_path', 'speed', ]
+        fields = ['video_path', 'speed', 'id', ]
 
