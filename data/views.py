@@ -1,8 +1,14 @@
+from symbol import decorators
 from urllib import request
+
+import json
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 import django_filters
 from django.shortcuts import render
 from rest_framework import viewsets, status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from data.models import Data
@@ -43,7 +49,7 @@ class TrafficFlowViewSet(viewsets.ModelViewSet):
     queryset = TrafficFlow.objects.all()
     serializer_class = TrafficFlowSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filter_fields = ('car_number', 'motor_number', 'people_number',)
+    filter_fields = ('videoId', 'car_number', 'motor_number', 'people_number',)
 
 
 # 违规行为统计
@@ -51,7 +57,7 @@ class IllegalStatisticsViewSet(viewsets.ModelViewSet):
     queryset = IllegalStatistics.objects.all()
     serializer_class = IllegalStatisticsSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filter_fields = ('value', 'name',)
+    filter_fields = ('videoId', 'value', 'name',)
 
 
 # # 限速输入
@@ -69,11 +75,25 @@ class VideoViewSet(viewsets.ModelViewSet):
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
     filter_fields = ('video_path', 'speed', )
 
-    def list(self, request, *args, **kwargs):
-        video_path = request.query_params.get('video_path')		# 获取传过来的参数：参数（单参）解析
-        print(video_path)
-        speed = request.query_params.get('speed')
-        print(speed)
-        ser = self.get_serializer(self.queryset, many=True)
-        self.serData = ser.data
-        return Response(ser.data)
+
+    # def list(self, request, *args, **kwargs):
+    #     video_path = request.query_params.get('video_path')		# 获取传过来的参数：参数（单参）解析
+    #     print(video_path)
+    #     speed = request.query_params.get('speed')
+    #     print(speed)
+    #     ser = self.get_serializer(self.queryset, many=True)
+    #     self.serData = ser.data
+    #     return Response(ser.data)
+    # @decorators.list_route(methods=['post'])
+
+
+
+@csrf_exempt
+def my_api(request):
+    dic = {}
+    if request.method == 'GET':
+        dic['message'] = 0
+        return HttpResponse(json.dumps(dic))
+    else:
+        dic['message'] = '方法错误'
+        return HttpResponse(json.dumps(dic, ensure_ascii=False))

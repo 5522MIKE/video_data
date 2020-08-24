@@ -24,6 +24,7 @@ class IllegalData(models.Model):
 class TrafficFlow(models.Model):
     id = models.IntegerField(primary_key=True)
     # video = models.ForeignKey('Video', on_delete=models.CASCADE)
+    videoId = models.IntegerField(default='1')
     car_number = models.IntegerField()
     motor_number = models.IntegerField()
     people_number = models.IntegerField()
@@ -33,6 +34,7 @@ class TrafficFlow(models.Model):
 class IllegalStatistics(models.Model):
     id = models.IntegerField(primary_key=True)
     # video = models.ForeignKey('Video', on_delete=models.CASCADE)
+    videoId = models.IntegerField(default='1')
     value = models.IntegerField()
     name = models.CharField(max_length=10)
 
