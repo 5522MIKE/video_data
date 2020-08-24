@@ -13,9 +13,9 @@ from data.models import TrafficFlow
 from data.serializer import TrafficFlowSerializer
 from data.models import IllegalStatistics
 from data.serializer import IllegalStatisticsSerializer
-from data.models import SpeedLimit
-from data.serializer import SpeedLimitSerializer
-from data.models import Video
+# from data.models import SpeedLimit
+# from data.serializer import SpeedLimitSerializer
+from data.models import VideoSpeed
 from data.serializer import VideoSerializer
 
 
@@ -54,24 +54,26 @@ class IllegalStatisticsViewSet(viewsets.ModelViewSet):
     filter_fields = ('value', 'name',)
 
 
-# 限速输入
-class SpeedLimitViewSet(viewsets.ModelViewSet):
-    queryset = SpeedLimit.objects.all()
-    serializer_class = SpeedLimitSerializer
-    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filter_fields = ('speed',)
+# # 限速输入
+# class SpeedLimitViewSet(viewsets.ModelViewSet):
+#     queryset = SpeedLimit.objects.all()
+#     serializer_class = SpeedLimitSerializer
+#     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
+#     filter_fields = ('speed',)
 
 
 # 视频路径
 class VideoViewSet(viewsets.ModelViewSet):
-    queryset = Video.objects.all()
+    queryset = VideoSpeed.objects.all()
     serializer_class = VideoSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filter_fields = ('video_path',)
+    filter_fields = ('video_path', 'speed', )
 
     def list(self, request, *args, **kwargs):
         video_path = request.query_params.get('video_path')		# 获取传过来的参数：参数（单参）解析
         print(video_path)
+        speed = request.query_params.get('speed')
+        print(speed)
         ser = self.get_serializer(self.queryset, many=True)
         self.serData = ser.data
         return Response(ser.data)

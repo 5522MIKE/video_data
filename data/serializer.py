@@ -1,23 +1,17 @@
 from rest_framework import serializers
 
 from data.models import Data
-from data.models import Video
+from data.models import VideoSpeed
 from data.models import IllegalData
 from data.models import TrafficFlow
 from data.models import IllegalStatistics
-from data.models import SpeedLimit
-from data.models import Video
+# from data.models import SpeedLimit
+from data.models import VideoSpeed
 
 
 class DataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Data
-        fields = '__all__'
-
-
-class VideoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Video
         fields = '__all__'
 
 
@@ -39,14 +33,14 @@ class IllegalStatisticsSerializer(serializers.ModelSerializer):
         fields = ['value', 'name', ]
 
 
-class SpeedLimitSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SpeedLimit
-        fields = ['speed', ]
+# class SpeedLimitSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = SpeedLimit
+#         fields = ['speed', ]
 
 
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Video
-        fields = ['video_path', ]
+        model = VideoSpeed
+        fields = ['video_path', 'speed', ]
 

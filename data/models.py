@@ -36,21 +36,16 @@ class IllegalStatistics(models.Model):
     name = models.CharField(max_length=10)
 
 
-# 限速表
-class SpeedLimit(models.Model):
-    id = models.IntegerField(primary_key=True)
-    # video = models.ForeignKey('Video', on_delete=models.CASCADE)
-    speed = models.IntegerField()
+# # 限速表
+# class SpeedLimit(models.Model):
+#     id = models.IntegerField(primary_key=True)
+#     # video = models.ForeignKey('Video', on_delete=models.CASCADE)
+#     speed = models.IntegerField()
 
 
 # 视频Video表
-class Video(models.Model):
+class VideoSpeed(models.Model):
     id = models.IntegerField(primary_key=True)
-    upload_time = models.DateTimeField()
+    upload_time = models.CharField(max_length=100)
     video_path = models.CharField(max_length=100)
-
-
-# 违规车辆图片表
-class IllegalImage(models.Model):
-    id = models.IntegerField(primary_key=True)
-    image_path = models.CharField(max_length=30)
+    speed = models.IntegerField()
