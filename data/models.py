@@ -48,7 +48,7 @@ class IllegalStatistics(models.Model):
 
 # 视频Video表
 class VideoSpeed(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     upload_time = models.CharField(max_length=100)
     video_path = models.CharField(max_length=100)
     speed = models.IntegerField()

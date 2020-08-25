@@ -73,7 +73,7 @@ class VideoViewSet(viewsets.ModelViewSet):
     queryset = VideoSpeed.objects.all()
     serializer_class = VideoSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filter_fields = ('video_path', 'speed', )
+    filter_fields = ('video_path', 'speed', 'id', )
 
 
     # def list(self, request, *args, **kwargs):
@@ -87,13 +87,61 @@ class VideoViewSet(viewsets.ModelViewSet):
     # @decorators.list_route(methods=['post'])
 
 
+class VideoYoloViewSet(viewsets.ModelViewSet):
+    queryset = VideoSpeed.objects.all()
+    serializer_class = VideoSerializer
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
+    filter_fields = ('video_path', 'speed', 'id', )
+
+    def list(self, request, *args, **kwargs):
+        video_path = request.query_params.get('video_path')  # 获取传过来的参数：参数（单参）解析
+        queryset = VideoSpeed.objects.all()
+        print(video_path)
+        data = {}
+        for title in queryset:
+            data[title.id] = title.video_path
+        return HttpResponse(json.dumps("1", ensure_ascii=False))
+        # return HttpResponse(json.dumps(data, ensure_ascii=False))
+        # return HttpResponse(queryset)
+
+
 
 @csrf_exempt
-def my_api(request):
+def volo(request):
     dic = {}
     if request.method == 'GET':
+        ID = request.GET.get('id', default='110')
+        print(ID)
         dic['message'] = 0
         return HttpResponse(json.dumps(dic))
     else:
         dic['message'] = '方法错误'
         return HttpResponse(json.dumps(dic, ensure_ascii=False))
+
+    # if request.method == "POST":
+    #     req = json.loads(request.body)
+    #     print(req)
+    #     key_flag = req.get("title") and req.get("content") and len(req) == 2
+    #     # 判断请求体是否正确
+    #     if key_flag:
+    #         title = req["title"]
+    #         content = req["content"]
+    #         # title返回的是一个list
+    #         title_exist = Article.objects.filter(title=title)
+    #         # 判断是否存在同名title
+    #         if len(title_exist) != 0:
+    #             return JsonResponse({"status": "BS.400", "msg": "title aleady exist,fail to publish."})
+    #
+    #         '''插入数据'''
+    #         add_art = Article(title=title, content=content, status="alive")
+    #         add_art.save()
+    #         return JsonResponse({"status": "BS.200", "msg": "publish article sucess."})
+    #     else:
+    #         return JsonResponse({"status": "BS.400", "message": "please check param."})
+    #
+    # if request.method == "GET":
+    #     articles = {}
+    #     query_art = VideoSpeed.objects.all()
+    #     for title in query_art:
+    #         articles[title.title] = title.status
+    #     return JsonResponse({"status":"BS.200","all_titles":articles,"msg":"query articles sucess."})

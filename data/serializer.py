@@ -44,3 +44,4 @@ class VideoSerializer(serializers.ModelSerializer):
         model = VideoSpeed
         fields = ['video_path', 'speed', 'id', ]
 
+
